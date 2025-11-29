@@ -1,3 +1,4 @@
+from os import getenv
 from task.app.main import run
 
 # TODO:
@@ -7,9 +8,13 @@ from task.app.main import run
 #       Default: None
 #  User massage: Explain the key components of a Large Language Model architecture
 
+deployment_name = getenv('DIAL_DEPLOYMENT_NAME', 'gpt-4o')
+stop = getenv('DIAL_STOP', None).split(',')
+
 run(
-    deployment_name='gpt-4o',
+    deployment_name=deployment_name,
     print_only_content=True,
+    stop=stop,
     # TODO:
     #  1. Use `stop` parameter with value "\n\n"
     #  2. Use `stop` parameter with values ["**Embedding Layer**", "**Transformer Blocks**", "**Training**"]

@@ -1,3 +1,5 @@
+from os import getenv
+from random import randint
 from task.app.main import run
 
 # TODO:
@@ -8,8 +10,15 @@ from task.app.main import run
 #       Default: None or random unless specified on the LLM side
 #  User massage: Name a random animal
 
+SEED_MIN = 1
+SEED_MAX = 1000
+
+deployment_name = getenv('DIAL_DEPLOYMENT_NAME', 'gpt-4o')
+seed = int(getenv('DIAL_SEED', randint(SEED_MIN, SEED_MAX)))
+
 run(
-    deployment_name='gpt-4o',
+    deployment_name=deployment_name,
+    seed=seed,
     # TODO:
     #  1. Use `seed` parameter with value 42 (or whatever you want)
     #  2. Use `n` parameter with value 5

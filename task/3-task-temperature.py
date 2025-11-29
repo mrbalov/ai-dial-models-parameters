@@ -1,3 +1,4 @@
+import os
 from task.app.main import run
 
 # TODO:
@@ -5,8 +6,12 @@ from task.app.main import run
 #        and determinism. Range: 0.0 to 2.0, Default: 1.0
 #  User massage: Describe the sound that the color purple makes when it's angry
 
+deployment_name = os.getenv('DIAL_DEPLOYMENT_NAME', 'gpt-4o')
+temperature = float(os.getenv('DIAL_TEMPERATURE', '1.0'))
+
 run(
-    deployment_name='gpt-4o',
+    temperature=temperature,
+    deployment_name=deployment_name,
     print_only_content=True,
     # TODO:
     #  Use `temperature` parameter with value in range from 0.0 to 1.0!

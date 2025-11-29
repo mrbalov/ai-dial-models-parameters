@@ -1,3 +1,5 @@
+from os import getenv
+from random import uniform
 from task.app.main import run
 
 # TODO:
@@ -8,9 +10,16 @@ from task.app.main import run
 #       Default: 0.0
 #  User massage: Explain the water cycle in simple terms for children
 
+FP_MIN = -2.0
+FP_MAX = 2.0
+
+deployment_name = getenv('DIAL_DEPLOYMENT_NAME', 'gpt-4o')
+frequency_penalty = float(getenv('DIAL_FREQUENCY_PENALTY', uniform(FP_MIN, FP_MAX)))
+
 run(
-    deployment_name='gpt-4o',
+    deployment_name=deployment_name,
     print_only_content=True,
+    frequency_penalty=frequency_penalty,
     # TODO:
     #  Use `frequency_penalty` parameter with different range (-2.0 to 2.0).
 )
